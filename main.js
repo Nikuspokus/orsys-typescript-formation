@@ -1,6 +1,7 @@
 console.log("start");
 
 const samples = 10;
+const multiplicationFactor = 2;
 
 const svgns = "http://www.w3.org/2000/svg";
 
@@ -36,4 +37,14 @@ const drawLine = (x1, y1, x2, y2) => {
   line.setAttributeNS(null, "y2", y2);
   lineContainer.appendChild(line);
 };
-drawLine(34, 45, 56, 67);
+
+for (let i = 0; i < samples; i++) {
+  const angle1 = i * ((2 * Math.PI) / samples) - Math.PI / 2;
+  const angle2 =
+    i * ((2 * Math.PI) / samples) * multiplicationFactor - Math.PI / 2;
+  const x1 = x0 + r0 * Math.cos(angle1);
+  const y1 = y0 + r0 * Math.sin(angle1);
+  const x2 = x0 + r0 * Math.cos(angle2);
+  const y2 = y0 + r0 * Math.sin(angle2);
+  drawLine(x1, y1, x2, y2);
+}
