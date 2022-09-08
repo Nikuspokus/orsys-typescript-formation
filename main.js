@@ -5,6 +5,7 @@ const samples = 10;
 const svgns = "http://www.w3.org/2000/svg";
 
 const container = document.querySelector("svg g.samples");
+const lineContainer = document.querySelector("svg g.lines");
 
 const x0 = 50;
 const y0 = 50;
@@ -26,3 +27,13 @@ for (let i = 0; i < samples; i++) {
   circle.setAttributeNS(null, "r", r);
   container.appendChild(circle);
 }
+
+const drawLine = (x1, y1, x2, y2) => {
+  const line = document.createElementNS(svgns, "line");
+  line.setAttributeNS(null, "x1", x1);
+  line.setAttributeNS(null, "y1", y1);
+  line.setAttributeNS(null, "x2", x2);
+  line.setAttributeNS(null, "y2", y2);
+  lineContainer.appendChild(line);
+};
+drawLine(34, 45, 56, 67);
