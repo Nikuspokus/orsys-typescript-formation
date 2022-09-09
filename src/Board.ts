@@ -1,10 +1,19 @@
 import { BoardConfig } from "./interfaces/BoardConfig";
-import { computeAngle, computePointCoordinates, querySelector } from "./utils";
+import { Point } from "./interfaces/Point";
+import {
+  computeAngle,
+  computePointCoordinates,
+  querySelector,
+  setNbrAttribute,
+} from "./utils";
 
 const svgns = "http://www.w3.org/2000/svg";
 
 export class Board {
-  config: BoardConfig;
+  config: BoardConfig = {
+    samples: 1,
+    multiplicationFactor: 1,
+  };
 
   clean() {
     querySelector("svg g.samples").innerHTML = "";
@@ -23,19 +32,19 @@ export class Board {
 
       const { x, y } = computePointCoordinates(angle);
 
-      const circle = document.createElementNS(svgns, "circle");
-      circle.setAttributeNS(null, "cx", `${x}`);
-      circle.setAttributeNS(null, "cy", y.toString());
-      circle.setAttributeNS(null, "r", r + "");
-      container.appendChild(circle);
+      const sample = document.createElementNS(svgns, "circle");
+      setNbrAttribute(sample, "cx", x);
+      setNbrAttribute(sample, "cy", y);
+      setNbrAttribute(sample, "r", r);
+      container.appendChild(sample);
     }
 
-    const drawLine = (p1, p2) => {
+    const drawLine = (p1: Point, p2: Point) => {
       const line = document.createElementNS(svgns, "line");
-      line.setAttributeNS(null, "x1", p1.x);
-      line.setAttributeNS(null, "y1", p1.y);
-      line.setAttributeNS(null, "x2", p2.x);
-      line.setAttributeNS(null, "y2", p2.y);
+      setNbrAttribute(line, "x1", p1.x);
+      setNbrAttribute(line, "y1", p1.y);
+      setNbrAttribute(line, "x2", p2.x);
+      setNbrAttribute(line, "y2", p2.y);
       lineContainer.appendChild(line);
     };
 

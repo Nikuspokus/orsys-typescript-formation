@@ -4,24 +4,30 @@ import { querySelector } from "./utils";
 type CommandCallBack = (newConfig: BoardConfig) => void;
 
 export class Command {
-  config: BoardConfig;
-  callback: CommandCallBack;
+  config: BoardConfig = {
+    multiplicationFactor: 0,
+    samples: 0,
+  };
+  callback: CommandCallBack | undefined;
 
   constructor() {
     this.addListeners();
   }
 
   addListeners() {
-    const boardConfigKeys = ["samples", "multiplicationFactor"];
+    const boardConfigKeys: (keyof BoardConfig)[] = [
+      "samples",
+      "multiplicationFactor",
+    ];
     for (const key of boardConfigKeys) {
       const input = querySelector(
         `div.command label.${key} input`,
         HTMLInputElement
       );
       input.addEventListener("input", (event) => {
-        this.config[key] = input.value;
+        this.config[key] = +input.value;
         this.render();
-        this.callback(this.config);
+        this.callback?.(this.config);
       });
     }
   }
@@ -31,7 +37,10 @@ export class Command {
   }
 
   render() {
-    const boardConfigKeys = ["samples", "multiplicationFactor"];
+    const boardConfigKeys: (keyof BoardConfig)[] = [
+      "samples",
+      "multiplicationFactor",
+    ];
     for (const key of boardConfigKeys) {
       const elt = querySelector(`div.command label.${key} span`);
       elt.innerHTML = this.config[key].toString();

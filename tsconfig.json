@@ -4,7 +4,8 @@
         "module": "ES6",
         "target": "ES5",
         "allowJs": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "strict": true
     },
     "include": ["src"],
     "exclude": [
