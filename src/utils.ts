@@ -15,10 +15,18 @@ export const computePointCoordinates = (angle): Point => {
   return { x, y };
 };
 
-export const querySelector = (cssSelector: string) => {
+export const querySelector = <T extends Element>(
+  cssSelector: string,
+  type?: new () => T
+): T => {
   const elt = document.querySelector(cssSelector);
   if (elt === null) {
     throw new Error("Cannot find selector: " + cssSelector);
   }
-  return elt;
+  if (type !== undefined && !(elt instanceof type)) {
+    throw new Error(
+      `Cannot find selector of type ${type} on selector ${cssSelector}`
+    );
+  }
+  return elt as T;
 };
