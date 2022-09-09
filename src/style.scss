@@ -1,0 +1,22 @@
+$width: 30em;
+$color: green;
+
+svg {
+  width: $width;
+  height: 40em;
+  border: 0.1em solid $color;
+
+  circle {
+    fill: transparent;
+    stroke: $color;
+    stroke-width: 0.02em;
+  }
+
+  .samples circle {
+    fill: $color;
+  }
+  .lines line {
+    stroke: $color;
+    stroke-width: 0.02em;
+  }
+}
