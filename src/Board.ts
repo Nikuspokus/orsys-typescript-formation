@@ -19,8 +19,6 @@ export class Board {
     const r = 1;
 
     for (let i = 0; i < this.config.samples; i++) {
-      console.log("i: ", i);
-
       const angle = computeAngle(i, this.config.samples);
 
       const { x, y } = computePointCoordinates(angle);
